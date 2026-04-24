@@ -165,12 +165,7 @@ namespace VRMolecularLab.ChemistrySystem
             string name = data.moleculeName;
 
             // Track all formations regardless of checkpoint status
-            bool isNewDiscovery = discoveredMolecules.Add(name);
-
-            if (isNewDiscovery)
-            {
-                UpdateDiscoveredListUI();
-            }
+            discoveredMolecules.Add(name);
 
             // ── Not a checkpoint — log silently and exit ───────────────────────
             if (!checkpointNames.Contains(name))
@@ -192,6 +187,9 @@ namespace VRMolecularLab.ChemistrySystem
 
             // ── Update the info panel texts from MoleculeData ─────────────────────
             UpdateInfoPanel(data);
+
+            // ── Update the list of discovered checkpoint molecules ────────────────
+            UpdateDiscoveredListUI();
 
             // ── Play checkpoint sound via AudioManager ────────────────────────
             if (AudioManager.Instance != null)
@@ -250,20 +248,20 @@ namespace VRMolecularLab.ChemistrySystem
         }
 
         /// <summary>
-        /// Updates the bulleted list text field with all molecules found so far.
+        /// Updates the text field with all checkpoint molecules found so far.
         /// </summary>
         private void UpdateDiscoveredListUI()
         {
             if (discoveredListText == null) return;
 
-            if (discoveredMolecules.Count == 0)
+            if (discoveredCheckpoints.Count == 0)
             {
-                discoveredListText.text = "None yet";
+                discoveredListText.text = "";
                 return;
             }
 
-            // Join all discovered molecules with wide white space
-            discoveredListText.text = string.Join("     ", discoveredMolecules);
+            // Join all discovered checkpoint molecules with wide white space
+            discoveredListText.text = string.Join("     ", discoveredCheckpoints);
         }
 
         private string FormatBondType(BondType bondType)
