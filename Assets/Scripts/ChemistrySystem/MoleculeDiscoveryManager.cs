@@ -64,6 +64,9 @@ namespace VRMolecularLab.ChemistrySystem
         [Tooltip("Displays the bond type (e.g., Covalent — Single Bond).")]
         [SerializeField] private TextMeshProUGUI bondTypeText;
 
+        [Tooltip("Displays a bulleted list of all unique molecules discovered so far.")]
+        [SerializeField] private TextMeshProUGUI discoveredListText;
+
         // ─── Inspector: Step Manager ─────────────────────────────────────────
 
         [Header("Step Manager")]
@@ -116,6 +119,12 @@ namespace VRMolecularLab.ChemistrySystem
 
         // ─── Unity Lifecycle ───────────────────────────────────────────────────
 
+        private void Start()
+        {
+            // Initialize the list UI so it's not empty/showing placeholder text on start
+            UpdateDiscoveredListUI();
+        }
+
         private void OnEnable()
         {
             BondManager.OnMoleculeFormed += HandleMoleculeFormed;
@@ -156,7 +165,12 @@ namespace VRMolecularLab.ChemistrySystem
             string name = data.moleculeName;
 
             // Track all formations regardless of checkpoint status
-            discoveredMolecules.Add(name);
+            bool isNewDiscovery = discoveredMolecules.Add(name);
+
+            if (isNewDiscovery)
+            {
+                UpdateDiscoveredListUI();
+            }
 
             // ── Not a checkpoint — log silently and exit ───────────────────────
             if (!checkpointNames.Contains(name))
@@ -233,6 +247,23 @@ namespace VRMolecularLab.ChemistrySystem
                       $"\n  → moleculeName = '{data.moleculeName}' | nameText assigned: {moleculeNameText != null}" +
                       $"\n  → formula      = '{data.formula}'       | formulaText assigned: {formulaText != null}" +
                       $"\n  → bondType     = '{data.bondType}'      | bondTypeText assigned: {bondTypeText != null}");
+        }
+
+        /// <summary>
+        /// Updates the bulleted list text field with all molecules found so far.
+        /// </summary>
+        private void UpdateDiscoveredListUI()
+        {
+            if (discoveredListText == null) return;
+
+            if (discoveredMolecules.Count == 0)
+            {
+                discoveredListText.text = "None yet";
+                return;
+            }
+
+            // Join all discovered molecules with wide white space
+            discoveredListText.text = string.Join("     ", discoveredMolecules);
         }
 
         private string FormatBondType(BondType bondType)
