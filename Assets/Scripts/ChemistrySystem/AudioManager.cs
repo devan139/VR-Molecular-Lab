@@ -19,12 +19,16 @@ namespace VRMolecularLab.ChemistrySystem
     /// SETUP:
     /// Add this script to a persistent scene GameObject (e.g., "AudioManager").
     /// Assign AudioClip assets in the Inspector. Adjust volumes per clip.
+    /// An AudioSource component will be automatically added to play exclusive sounds.
     /// </summary>
+    [RequireComponent(typeof(AudioSource))]
     public class AudioManager : MonoBehaviour
     {
         // ─── Singleton ─────────────────────────────────────────────────────────
 
         public static AudioManager Instance { get; private set; }
+
+        private AudioSource mainAudioSource;
 
         private void Awake()
         {
@@ -35,6 +39,9 @@ namespace VRMolecularLab.ChemistrySystem
                 return;
             }
             Instance = this;
+
+            // Grab the AudioSource that RequireComponent ensures is attached
+            mainAudioSource = GetComponent<AudioSource>();
         }
 
         // ─── Inspector: Clips & Volumes ────────────────────────────────────────
@@ -71,7 +78,7 @@ namespace VRMolecularLab.ChemistrySystem
         /// </summary>
         public void PlayBondSound(Vector3 position)
         {
-            Play(bondSound, bondVolume, position, "Bond");
+            PlayAtPoint(bondSound, bondVolume, position, "Bond");
         }
 
         /// <summary>
@@ -80,7 +87,7 @@ namespace VRMolecularLab.ChemistrySystem
         /// </summary>
         public void PlayBreakSound(Vector3 position)
         {
-            Play(breakSound, breakVolume, position, "Break");
+            PlayAtPoint(breakSound, breakVolume, position, "Break");
         }
 
         /// <summary>
@@ -88,7 +95,7 @@ namespace VRMolecularLab.ChemistrySystem
         /// </summary>
         public void PlayCheckpointSound()
         {
-            Play(checkpointSound, checkpointVolume, Vector3.zero, "Checkpoint");
+            PlayAtPoint(checkpointSound, checkpointVolume, Vector3.zero, "Checkpoint");
         }
 
         /// <summary>
@@ -96,7 +103,25 @@ namespace VRMolecularLab.ChemistrySystem
         /// </summary>
         public void PlayAllCompleteSound()
         {
-            Play(allCompleteSound, allCompleteVolume, Vector3.zero, "AllComplete");
+            PlayAtPoint(allCompleteSound, allCompleteVolume, Vector3.zero, "AllComplete");
+        }
+
+        /// <summary>
+        /// Plays the given AudioClip exclusively.
+        /// If another clip is currently playing on the main AudioSource, it will be stopped immediately.
+        /// </summary>
+        public void Play(AudioClip clip, float volume = 1f)
+        {
+            if (clip == null)
+            {
+                Debug.LogWarning("[AudioManager] Tried to Play() a null AudioClip.");
+                return;
+            }
+
+            mainAudioSource.Stop();
+            mainAudioSource.clip = clip;
+            mainAudioSource.volume = volume;
+            mainAudioSource.Play();
         }
 
         // ─── Internal ──────────────────────────────────────────────────────────
@@ -107,7 +132,7 @@ namespace VRMolecularLab.ChemistrySystem
         /// For sounds without a meaningful world position (checkpoints, UI), plays
         /// at the camera position so spatial audio is neutral.
         /// </summary>
-        private void Play(AudioClip clip, float volume, Vector3 position, string label)
+        private void PlayAtPoint(AudioClip clip, float volume, Vector3 position, string label)
         {
             if (clip == null)
             {
