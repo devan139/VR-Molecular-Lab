@@ -812,7 +812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VRMolecularLab.ChemistrySystem.MoleculeController
   moleculeData: {fileID: 11400000, guid: eabdb5a1e111a794ba82a5456b2e3690, type: 2}
   atomFactory: {fileID: 11400000, guid: da6ccb34efdac2843b6441ab1b5aede3, type: 2}
-  breakScatterRadius: 0.15
+  breakScatterRadius: 1
 --- !u!65 &8455087201460368472
 BoxCollider:
   m_ObjectHideFlags: 0

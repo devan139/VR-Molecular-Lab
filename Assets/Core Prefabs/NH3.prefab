@@ -181,7 +181,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f0be776055813134a8d7229f8b961016, type: 2}
+  - {fileID: 2100000, guid: 6d17c54d8e74215469f606da84cfe397, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -921,7 +921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VRMolecularLab.ChemistrySystem.MoleculeController
   moleculeData: {fileID: 11400000, guid: 0320cbe55517a2840b1a20f398950c3f, type: 2}
   atomFactory: {fileID: 11400000, guid: da6ccb34efdac2843b6441ab1b5aede3, type: 2}
-  breakScatterRadius: 0.15
+  breakScatterRadius: 1
 --- !u!1 &6701200846805574247
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,7 +989,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f0be776055813134a8d7229f8b961016, type: 2}
+  - {fileID: 2100000, guid: 6d17c54d8e74215469f606da84cfe397, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1080,7 +1080,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f0be776055813134a8d7229f8b961016, type: 2}
+  - {fileID: 2100000, guid: 6d17c54d8e74215469f606da84cfe397, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1224,7 +1224,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 76618f7490c40334fa7b685859587d2e, type: 2}
+  - {fileID: 2100000, guid: e316aa2cdfe71ee4bb3c7d5eaeff7195, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
