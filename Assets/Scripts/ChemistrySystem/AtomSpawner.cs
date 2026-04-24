@@ -69,6 +69,27 @@ namespace VRMolecularLab.ChemistrySystem
             SpawnAtom();
         }
 
+        /// <summary>
+        /// Clears any pending respawns, destroys the current atom waiting at the spawner,
+        /// and spawns a fresh one. Used by the ResetManager.
+        /// </summary>
+        public void Respawn()
+        {
+            StopAllCoroutines();
+
+            if (currentAtom != null)
+            {
+                Destroy(currentAtom);
+                currentAtom = null;
+            }
+
+            // Only spawn if this spawner is currently active
+            if (hasStarted)
+            {
+                SpawnAtom();
+            }
+        }
+
         // ─── Spawn Logic ───────────────────────────────────────────────────────
 
         /// <summary>
