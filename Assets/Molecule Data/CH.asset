@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49df1ae86d9537e468d474b5a05c48ae, type: 3}
+  m_Name: CH
+  m_EditorClassIdentifier: Assembly-CSharp::VRMolecularLab.ChemistrySystem.MoleculeData
+  moleculeName: CH
+  formula: CH
+  requiredAtoms: 0000000002000000
+  bondType: 0
+  moleculePrefab: {fileID: 1187828197771039410, guid: e80552e42bb7e99419c821ad0b236866, type: 3}
