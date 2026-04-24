@@ -110,7 +110,7 @@ namespace VRMolecularLab.ChemistrySystem
         /// Plays the given AudioClip exclusively.
         /// If another clip is currently playing on the main AudioSource, it will be stopped immediately.
         /// </summary>
-        public void Play(AudioClip clip, float volume = 1f)
+        public void Play(AudioClip clip)
         {
             if (clip == null)
             {
@@ -120,7 +120,6 @@ namespace VRMolecularLab.ChemistrySystem
 
             mainAudioSource.Stop();
             mainAudioSource.clip = clip;
-            mainAudioSource.volume = volume;
             mainAudioSource.Play();
         }
 

@@ -628,7 +628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VRMolecularLab.ChemistrySystem.AtomController
   atomType: 1
-  bondingStartDelay: 1
+  bondingStartDelay: 2
 --- !u!135 &200494707232038236
 SphereCollider:
   m_ObjectHideFlags: 0
